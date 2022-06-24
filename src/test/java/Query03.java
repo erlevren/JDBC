@@ -13,6 +13,7 @@ public class Query03 {
         while (rs.next()){
             System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+ "\t" +rs.getString(3));
         }
+
         System.out.println("==================================================================================");
         // SORU2:SATIS ve MUHASEBE bolumlerinde calişan personelin isimlerini ve maaşlarını,
         // maaş ters sıralı listeleyiniz.
@@ -22,6 +23,7 @@ public class Query03 {
         while (rs2.next()){
             System.out.println(rs2.getString(1)+"\t"+rs2.getInt(2));
         }
+
         System.out.println("==================================================================================");
         // Soru3: Tüm bölümlerde çalışan personel isimlerini, bölüm isimlerini ve maaşlarını,
         // bölüm ve maas sıralı listeleyiniz.
@@ -34,6 +36,15 @@ public class Query03 {
         while (rs3.next()){
             System.out.println(rs3.getString(1) + "\t" + rs3.getString(2) + "\t" + rs3.getInt(3));
         }
+        System.out.println("==================================================================================");
+
+        // SORU4: Maaşı en yüksek 10 kişinin bolümünü, adını ve maaşını listeleyiniz.
+        ResultSet rs4 = st.executeQuery("select bolumler.bolum_isim,personel.personel_isim,personel.maas " +
+                "from bolumler left join personel on personel.bolum_id=bolumler.bolum_id order by maas desc limit 10");
+        while(rs4.next()){
+            System.out.printf("%-16s %-16s %-8s\n", rs4.getString(2), rs4.getString(1), rs4.getInt(3));
+        }
+
 
     }
 }
